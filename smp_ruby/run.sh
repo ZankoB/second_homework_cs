@@ -5,10 +5,11 @@
 #SBATCH --ntasks=1
 #SBATCH --time=00:05:00
 #SBATCH --partition=gpu 
+#SBATCH --reservation=fri
 
 GEM5_WORKSPACE=/d/hpc/projects/FRI/GEM5/gem5_workspace
 GEM5_ROOT=$GEM5_WORKSPACE/gem5
-GEM_PATH=$GEM5_ROOT/build/RISCV
+GEM5_PATH=$GEM5_ROOT/build/RISCV_ALL_RUBY
 
 
-srun apptainer exec $GEM5_WORKSPACE/gem5_rv.sif $GEM_PATH/gem5.opt --outdir=../logs ruby_benchmark.py --num_cores=2  --l1_size=32KiB --l2_size=256KiB
+srun apptainer exec $GEM5_WORKSPACE/gem5_rv.sif $GEM5_PATH/gem5.opt --outdir=../logs ruby_benchmark.py --num_cores=16  --l1_size=32KiB --l2_size=256KiB
